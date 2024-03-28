@@ -1,0 +1,32 @@
+.light-mode *, .dark-mode * {
+    transition-property: color, background-color;
+    transition-duration: .25s;
+    transition-timing-function: linear;
+}
+
+
+
+.light-mode .light-red {
+    color: red !important;
+}
+
+
+.light-mode .light-green {
+    color: green !important;
+}
+
+.light-mode .light-blue {
+    color: blue !important;
+}
+
+.light-mode .colored-box{
+    border-color: black;
+}
+
+.light-mode .navbar-icons {
+    color: black;
+}
+
+.light-mode #guess-button{
+    border-color: black;
+}
