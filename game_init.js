@@ -2,8 +2,9 @@ function number_to_fixed_len_str(number, len) {
     return ('0'.repeat(len - 1) + number).slice(-len)
 }
 
-function get_daily_seed() {
-    const date = new Date()
+const arrival_date_global = new Date()
+
+function get_daily_seed(date) {
     const year_str = number_to_fixed_len_str(date.getFullYear(), 4)
     const month_str = number_to_fixed_len_str(date.getMonth() + 1, 2)
     const day_str = number_to_fixed_len_str(date.getDate(), 2)
@@ -26,11 +27,18 @@ function color_box(red, green, blue) {
     $('#main-box').css('background-color', 'rgb(' + red + ', ' + green + ', ' + blue + ')')
 }
 
+function update_modal_correct_colors(red, green, blue) {
+    $('#correct-red-modal').text(red)
+    $('#correct-green-modal').text(green)
+    $('#correct-blue-modal').text(blue)
+}
+
 function initialize_game() {
-    const seed = get_daily_seed()
+    const seed = get_daily_seed(arrival_date_global)
     let rng = get_rng(seed)
     let {red, green, blue} = generate_rgb_values(rng)
     color_box(red, green, blue)
+    update_modal_correct_colors(red, green,)
 }
 
 

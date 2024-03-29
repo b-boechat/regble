@@ -49,7 +49,7 @@ function get_past_guesses() {
 }
 
 
-function disable_button() {
+function disable_guess_button() {
     $('#guess-button').prop('disabled', true)
 }
 
@@ -69,8 +69,8 @@ function show_end_game_modal(type) {
 }
 
 function process_icon(color_name, guessed_value, box_value) {
-    check_icon_query = '.dont-display-row .' + color_name + '-guess .bi-check-lg'
-    fire_icon_query = '.dont-display-row .' + color_name + '-guess .bi-fire'
+    let check_icon_query = '.dont-display-row .' + color_name + '-guess .bi-check-lg'
+    let fire_icon_query = '.dont-display-row .' + color_name + '-guess .bi-fire'
 
     if (guessed_value === box_value) {
         return
@@ -90,13 +90,6 @@ function process_all_icons(input_values, box_values) {
     process_icon("red", input_values.red, box_values.red)
     process_icon("green", input_values.green, box_values.green)
     process_icon("blue", input_values.blue, box_values.blue)
-}
-
-
-function check_victory(input_values, box_values) {
-    return (input_values.red === box_values.red && 
-        input_values.green === box_values.green && 
-        input_values.blue === box_values.blue)
 }
 
 function update_guess_table(input_values, box_values) {
@@ -119,17 +112,20 @@ function update_guess_table(input_values, box_values) {
 }
 
 function make_guess(input_values) {
-    box_values = read_box_values()
+    let box_values = read_box_values()
     update_guess_table(input_values, box_values)
 
+    update_game()
+    /*
     if (check_victory(input_values, box_values)) {
         show_end_game_modal('victory')
-        disable_button()
+        disable_guess_button()
     }
     else if (no_more_guesses()) {
         show_end_game_modal('defeat')
-        disable_button()
+        disable_guess_button()
     }
+    */
 }
 
 

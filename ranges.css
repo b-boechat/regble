@@ -5,18 +5,6 @@ input[type="range"] {
     margin-bottom: 5px;
 }
 
-.red-color {
-    color: red;
-}
-
-.green-color {
-    color: green;
-}
-
-.blue-color {
-    color: blue;
-}
-
 .range-textbox{
     width: 4ch;
     margin-left: 10px;
