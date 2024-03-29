@@ -65,7 +65,7 @@
     </div>
 
     <!-- Input area -->
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center ranges-area">
         <div class="text-center">
               <div class="range-container">
                   <input type="range" class="red-color" id="red-range" min="0" max="255" step="5" value="130">
@@ -124,12 +124,6 @@
               <td class="green-guess"><span class=rgb-value>255</span><i class="bi bi-check-lg"></i><i class="bi bi-fire dont-display-icon"></i></td>
               <td class="blue-guess"><span class=rgb-value>255</span><i class="bi bi-check-lg"></i><i class="bi bi-fire dont-display-icon"></i></td>
             </tr>
-            <tr class="dont-display-row">
-              <th scope="row">5</th>
-              <td class="red-guess"><span class=rgb-value>255</span><i class="bi bi-check-lg"></i></td>
-              <td class="green-guess"><span class=rgb-value>255</span><i class="bi bi-check-lg"></i></td>
-              <td class="blue-guess"><span class=rgb-value>255</span><i class="bi bi-check-lg"></i></td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -145,7 +139,7 @@
         </div>
         <div class="modal-body">
           <span lang="en">
-            <p>Try to guess the colored box's RGB code in 5 attempts or less.</p>
+            <p>Try to guess the colored box's RGB code in 4 attempts or less.</p>
             <p>Move the sliders to input values for the <span class="light-red">red</span>, <span class="light-green">green</span> and <span class="light-blue">blue</span> color components, which range from 0 to 255 (inclusive).</p>
             <p>After each guess, use the feedback to help improve your next attempt.</p>
               <ul>
@@ -157,7 +151,7 @@
             <p>A new puzzle is released daily at midnight.</p>
           </span>
           <span lang="pt">
-            <p>Tente adivinhar o código RGB da cor do quadrado em 5 tentativas ou menos.</p>
+            <p>Tente adivinhar o código RGB da cor do quadrado em 4 tentativas ou menos.</p>
             <p>Mova os controles deslizantes para escolher valores para as componentes de cor <span class="light-red">vermelha</span>, <span class="light-green">verde</span> and <span class="light-blue">azul</span>, que variam de 0 a 255 (inclusivo).</p>
             <p>Depois de cada tentativa, aproveite o feedback recebido para melhor sua próxima tantativa.</p>
               <ul>
@@ -236,6 +230,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </script>
   
+  <script src="./rng.js" charset="utf-8"></script>
   <script src="./game_init.js" charset="utf-8"></script>
   <script src="./navbar.js" charset="utf-8"></script>
   <script src="./synchronize_ranges.js" charset="utf-8"></script>

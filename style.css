@@ -44,7 +44,7 @@
 }
 
 .colored-box{
-    background-color: turquoise;
+    background-color: white;
     border-radius: 15%;
     height: 80px;
     width: 80px;
@@ -98,3 +98,7 @@ table{
 }
 
 .fade-in { animation: fadeIn 1s; }
+
+.ranges-area {
+    margin-top: 18px;
+}
