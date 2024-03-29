@@ -1,4 +1,4 @@
-function read_rgb_values() {
+function read_input_values() {
     let rgb_textboxes = $('.range-textbox')
     return {
         red: parseInt(rgb_textboxes.eq(0).val()), 
@@ -20,9 +20,9 @@ function read_box_values() {
     let main_box = $('#main-box')
     color = rgb_string_to_values(main_box.css('background-color'))
     return {
-        box_red: parseInt(color.red),
-        box_green: parseInt(color.green),
-        box_blue: parseInt(color.blue)
+        red: parseInt(color.red),
+        green: parseInt(color.green),
+        blue: parseInt(color.blue)
     }
 }
 
@@ -33,7 +33,23 @@ function no_more_guesses() {
     return false
 }
 
-function disable_button() {
+function get_past_guesses() {
+    let past_guesses = []
+    let num_guesses_rows = $('.guess-row:not(.dont-display-row)').length
+    for (let i = 0; i < num_guesses_rows; ++i) {
+        past_guesses.push(
+            {
+                "red": parseInt($('.guess-row:not(.dont-display-row) .red-guess').eq(i).text()),
+                "green": parseInt($('.guess-row:not(.dont-display-row) .green-guess').eq(i).text()),
+                "blue": parseInt($('.guess-row:not(.dont-display-row) .blue-guess').eq(i).text()),
+            }
+        )
+    }
+    return past_guesses
+}
+
+
+function disable_guess_button() {
     $('#guess-button').prop('disabled', true)
 }
 
@@ -53,8 +69,8 @@ function show_end_game_modal(type) {
 }
 
 function process_icon(color_name, guessed_value, box_value) {
-    check_icon_query = '.dont-display-row .' + color_name + '-guess .bi-check-lg'
-    fire_icon_query = '.dont-display-row .' + color_name + '-guess .bi-fire'
+    let check_icon_query = '.dont-display-row .' + color_name + '-guess .bi-check-lg'
+    let fire_icon_query = '.dont-display-row .' + color_name + '-guess .bi-fire'
 
     if (guessed_value === box_value) {
         return
@@ -70,11 +86,13 @@ function process_icon(color_name, guessed_value, box_value) {
     }
 }
 
-function check_victory(red, green, blue, box_red, box_green, box_blue) {
-    return (red === box_red && green === box_green && blue === box_blue)
+function process_all_icons(input_values, box_values) {
+    process_icon("red", input_values.red, box_values.red)
+    process_icon("green", input_values.green, box_values.green)
+    process_icon("blue", input_values.blue, box_values.blue)
 }
 
-function update_guess_table(red, green, blue, box_red, box_green, box_blue) {
+function update_guess_table(input_values, box_values) {
 
     $('.dont-display-table').removeClass('dont-display-table')
 
@@ -82,33 +100,33 @@ function update_guess_table(red, green, blue, box_red, box_green, box_blue) {
         console.log("Can't guess anymore.")
     }
     else {
-        $('.dont-display-row .red-guess .rgb-value').eq(0).text(red)
-        $('.dont-display-row .green-guess .rgb-value').eq(0).text(green)
-        $('.dont-display-row .blue-guess .rgb-value').eq(0).text(blue)
+        $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
+        $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
+        $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
 
-        process_icon("red", red, box_red)
-        process_icon("green", green, box_green)
-        process_icon("blue", blue, box_blue)
+        process_all_icons(input_values, box_values)
 
         $('.dont-display-row').eq(0).addClass('fade-in')
         $('.dont-display-row').eq(0).removeClass('dont-display-row')
     }
 }
 
-function make_guess() {
-    let {red, green, blue} = read_rgb_values()
-    let {box_red, box_green, box_blue} = read_box_values()
-    update_guess_table(red, green, blue, box_red, box_green, box_blue)
+function make_guess(input_values) {
+    let box_values = read_box_values()
+    update_guess_table(input_values, box_values)
 
-    if (check_victory(red, green, blue, box_red, box_green, box_blue)) {
+    update_game()
+    /*
+    if (check_victory(input_values, box_values)) {
         show_end_game_modal('victory')
-        disable_button()
+        disable_guess_button()
     }
     else if (no_more_guesses()) {
         show_end_game_modal('defeat')
-        disable_button()
+        disable_guess_button()
     }
+    */
 }
 
 
-$('#guess-button').click(function() {make_guess()})
+$('#guess-button').click(function() {make_guess(read_input_values()) } )

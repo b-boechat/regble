@@ -26,6 +26,18 @@
     font-size: 1.8rem;
 }
 
+.red-color {
+    color: red;
+}
+
+.green-color {
+    color: green;
+}
+
+.blue-color {
+    color: blue;
+}
+
 .light-red {
     color: #FF99A9;
 }
@@ -72,11 +84,11 @@
     margin-bottom: 15px;
 }
 
-.dont-display-row, .dont-display-table {
+.dont-display-row, .dont-display-table, .dont-display-icon, .dont-display {
     display: none;
 }
 
-.dont-display-icon {
+.defeat-modal .victory-modal-content, .victory-modal .defeat-modal-content {
     display: none;
 }
 
@@ -103,3 +115,25 @@ table{
 .ranges-area {
     margin-top: 18px;
 }
+
+#correct-color-modal-info {
+    margin-left: 6px;
+}
+
+.correct-color-square {
+    margin-left: 2px;
+}
+
+.share-button-tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
