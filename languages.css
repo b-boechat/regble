@@ -1,0 +1,3 @@
+html:lang(en) [lang="pt"], html:lang(pt) [lang="en"] { 
+    display: none; 
+}

@@ -12,6 +12,21 @@ function toggle_dark_mode() {
     }
 }
 
+function toggle_language() {
+    const lang = $('html').attr('lang')
+    $('html [lang="pt"], html [lang="en"]').addClass('fade-in')
+    switch (lang) {
+        case 'en':
+            $('html').attr('lang', 'pt')
+            break;
+        case 'pt':
+            $('html').attr('lang', 'en')
+            break;
+        default:
+            console.log('Invalid language.')
+    }
+}
+
 function set_light_mode() {
     console.log("Setting light mode.")
     $('html').attr('data-bs-theme', 'light')
@@ -33,3 +48,4 @@ function set_dark_mode() {
 
 
 $('#light-mode-toggler-button').click(function() {toggle_dark_mode()})
+$('#lang-button').click(function() {toggle_language()})

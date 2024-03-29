@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ReGBle - Guess the color!</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 
+  <link href="./languages.css" rel="stylesheet">
   <link href="./style.css" rel="stylesheet">
   <link href="./fonts.css" rel="stylesheet">
   <link href="./ranges.css" rel="stylesheet">
@@ -41,7 +43,10 @@
             <button class="nav-link" id="help-button" data-bs-toggle="modal" data-bs-target="#help-modal"> <i class="bi bi-question-circle navbar-icons"></i></a>
           </li>
           <li class="nav-item">
-            <button class="nav-link" id="settings-button" data-bs-toggle="modal" data-bs-target="#settings-modal"> <i class="bi bi-gear-wide navbar-icons"></i></a>
+            <button class="nav-link" id="lang-button"><span class="fi fi-br" lang="en"></span><span class="fi fi-gb" lang="pt"></span></a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link dont-display-icon" id="settings-button" data-bs-toggle="modal" data-bs-target="#settings-modal"> <i class="bi bi-gear-wide navbar-icons"></i></a>
           </li>
         </ul>
       </div>
@@ -52,7 +57,8 @@
 
     <!-- Game info -->
     <div class="row justify-content-center">
-      <h1 class="text-center" id="top-text">What is this color?</h1>
+      <h1 class="text-center" id="top-text" lang="en">What is this color?</h1>
+      <h1 class="text-center" id="top-text" lang="pt">Que cor é essa?</h1>
     </div>
     <div class="row justify-content-center">
         <div class="colored-box fade-in" id="main-box"></div>
@@ -78,7 +84,7 @@
 
     <!-- Guess button -->
     <div class="row justify-content-center align-items-center">
-      <button type="button" class="btn btn-success" id="guess-button">Guess</button>
+      <button type="button" class="btn btn-success" id="guess-button"><span lang="en">Guess</span><span lang="pt">Adivinhar</span></button>
     </div>
     
     <!-- Guesses table -->
@@ -87,10 +93,10 @@
         <table class="table table-bordered table-striped table-sm table-hover dont-display-table">
           <thead>
             <tr class>
-              <th scope="col">Guess #</th>
-              <th scope="col"><span class="light-red">Red</span></th>
-              <th scope="col"><span class="light-green">Green</span></th>
-              <th scope="col"><span class="light-blue">Blue</span></th>
+              <th scope="col"><span lang="en">Guess #</span><span lang="pt">Palpite #</span></th>
+              <th scope="col"><span class="light-red"><span lang="en">Red</span><span lang="pt">Vermelho</span></span></th>
+              <th scope="col"><span class="light-green"><span lang="en">Green</span><span lang="pt">Verde</span></span></th>
+              <th scope="col"><span class="light-blue"><span lang="en">Blue</span><span lang="pt">Azul</span></span></th>
             </tr>
           </thead>
           <tbody>
@@ -135,22 +141,36 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="help-modal-title">How to play</h5>
+          <h5 class="modal-title" id="help-modal-title"><span lang="en">How to play</span><span lang="pt">Como jogar</span></h5>
         </div>
         <div class="modal-body">
-          <p>Try to guess today's colored box's RGB code in 5 attempts or less.</p>
-          <p>Move the sliders to input values for the <span class="light-red">red</span>, <span class="light-green">green</span> and <span class="light-blue">blue</span> color components, which range from 0 to 255 (inclusive).</p>
-          <p>After each guess, use the feedback to help improve your next attempt.
-            <ul>
-              <li><i class="bi bi-arrow-up"></i> means you need to guess higher.</li>
-              <li><i class="bi bi-arrow-down"></i> means you need to guess lower.</li>
-              <li><i class="bi bi-check-lg"></i> means you got the color's value right.</li>
-            </ul>
-          <p>Want to learn more about the RGB color model? <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">Click here</a>.</p>
-          <p>A new puzzle is released daily at midnight.</p>
+          <span lang="en">
+            <p>Try to guess the colored box's RGB code in 5 attempts or less.</p>
+            <p>Move the sliders to input values for the <span class="light-red">red</span>, <span class="light-green">green</span> and <span class="light-blue">blue</span> color components, which range from 0 to 255 (inclusive).</p>
+            <p>After each guess, use the feedback to help improve your next attempt.</p>
+              <ul>
+                <li><i class="bi bi-arrow-up"></i> means you need to guess higher.</li>
+                <li><i class="bi bi-arrow-down"></i> means you need to guess lower.</li>
+                <li><i class="bi bi-check-lg"></i> means you got the color's value right.</li>
+              </ul>
+            <p>Want to learn more about the RGB color model? <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">Click here</a>.</p>
+            <p>A new puzzle is released daily at midnight.</p>
+          </span>
+          <span lang="pt">
+            <p>Tente adivinhar o código RGB da cor do quadrado em 5 tentativas ou menos.</p>
+            <p>Mova os controles deslizantes para escolher valores para as componentes de cor <span class="light-red">vermelha</span>, <span class="light-green">verde</span> and <span class="light-blue">azul</span>, que variam de 0 a 255 (inclusivo).</p>
+            <p>Depois de cada tentativa, aproveite o feedback recebido para melhor sua próxima tantativa.</p>
+              <ul>
+                <li><i class="bi bi-arrow-up"></i> significa que você precisa dar um palpite mais alto.</li>
+                <li><i class="bi bi-arrow-down"></i> significa que você precisa dar um palpite mais baixo.</li>
+                <li><i class="bi bi-arrow-down"></i> significa que você acertou o valor da componente.</li>
+              </ul>
+            <p>Quer aprender mais sobre o sistema de cor RGB? <a href="https://pt.wikipedia.org/wiki/RGB" target="_blank">Clique aqui</a>.</p>
+            <p>Um desafio novo é lançado diariamente à meia-noite.</p>
+          </span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span lang="en">Close</span><span lang="pt">Fechar</span></button>
         </div>
       </div>
     </div>
@@ -161,13 +181,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="settings-modal-title">Settings</h5>
+          <h5 class="modal-title" id="settings-modal-title"><span lang="en">Settings</span><span lang="pt">Configurações</span></h5>
         </div>
         <div class="modal-body">
           <p>Que configuração o que irmão, tá doidão?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span lang="en">Close</span><span lang="pt">Fechar</span></button>
         </div>
       </div>
     </div>
@@ -178,13 +198,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="victory-modal-title">Congratulations!</h5>
+          <h5 class="modal-title" id="victory-modal-title"><span lang="en">Congratulations!</span><span lang="pt">Parabéns!</span></h5>
         </div>
         <div class="modal-body">
-          <p>You guessed correctly!</p>
+          <p lang="en">You guessed correctly!</p>
+          <p lang="pt">Você conseguiu!</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span lang="en">Close</span><span lang="pt">Fechar</span></button>
         </div>
       </div>
     </div>
@@ -195,13 +216,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="defeat-modal-title">Defeat...</h5>
+          <h5 class="modal-title" id="defeat-modal-title"><span lang="en">Defeat...</span><span lang="pt">Derrota...</span></h5>
         </div>
         <div class="modal-body">
-          <p>Better luck next time!</p>
+          <p lang="en">Better luck next time!</p>
+          <p lang="pt">Mais sorte na próxima vez!</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span lang="en">Close</span><span lang="pt">Fechar</span></button>
         </div>
       </div>
     </div>

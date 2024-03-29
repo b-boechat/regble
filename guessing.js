@@ -90,7 +90,7 @@ function update_guess_table(red, green, blue, box_red, box_green, box_blue) {
         process_icon("green", green, box_green)
         process_icon("blue", blue, box_blue)
 
-        $('.dont-display-row').eq(0).addClass('fade-in-table-row')
+        $('.dont-display-row').eq(0).addClass('fade-in')
         $('.dont-display-row').eq(0).removeClass('dont-display-row')
     }
 }
