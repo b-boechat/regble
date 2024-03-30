@@ -71,7 +71,7 @@ function force_game_state(state) {
     for (let i = 0; i < state.guesses.length; ++i) {
         update_guess_table(state.guesses, state.box_values, false)
     }
-    update_game(state)
+    update_game(state, false)
 }
 
 function remove_all_cookies() {

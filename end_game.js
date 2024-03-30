@@ -15,9 +15,14 @@ function check_game_status(last_guess, box_values) {
     return "ongoing"
 }
 
+function change_guess_button_to_info() {
+    $('#guess-button #guess-text').addClass('dont-display')
+    $('#guess-button #show-results-text').removeClass('dont-display')
+}
+
 function process_end_game(result, guesses, show_modal) {
+    change_guess_button_to_info()
     update_end_game_modal(result, guesses, show_modal)
-    disable_guess_button()
 }
 
 

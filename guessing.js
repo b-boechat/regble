@@ -48,11 +48,6 @@ function get_past_guesses() {
     return past_guesses
 }
 
-
-function disable_guess_button() {
-    $('#guess-button').prop('disabled', true)
-}
-
 function show_end_game_modal(type) {
     switch (type) {
         case 'victory':
@@ -97,20 +92,20 @@ function update_guess_table(input_values, box_values, fade_in = true) {
     $('.dont-display-table').removeClass('dont-display-table')
 
     if (no_more_guesses()) {
-        console.log("Can't guess anymore.")
+        return
     }
-    else {
-        $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
-        $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
-        $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
+    
+    $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
+    $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
+    $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
 
-        process_all_icons(input_values, box_values)
+    process_all_icons(input_values, box_values)
 
-        if (fade_in) {
-            $('.dont-display-row').eq(0).addClass('fade-in')
-        }
-        $('.dont-display-row').eq(0).removeClass('dont-display-row')
+    if (fade_in) {
+        $('.dont-display-row').eq(0).addClass('fade-in')
     }
+    
+    $('.dont-display-row').eq(0).removeClass('dont-display-row')
 }
 
 function make_guess(input_values) {

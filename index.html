@@ -85,7 +85,14 @@
 
     <!-- Guess button -->
     <div class="row justify-content-center align-items-center">
-      <button type="button" class="btn btn-success fade-in" id="guess-button"><span lang="en">Guess</span><span lang="pt">Palpite</span></button>
+      <button type="button" class="btn btn-success fade-in" id="guess-button">
+        <span id="guess-text">
+          <span lang="en">Guess</span><span lang="pt">Palpite</span>
+        </span>
+        <span class="dont-display" id="show-results-text">
+          <span lang="en">Show</span><span lang="pt">Mostrar</span>
+        </span>
+      </button>
     </div>
     
     <!-- Guesses table -->

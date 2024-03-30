@@ -163,5 +163,4 @@ function copy_results() {
 
 $('#light-mode-toggler-button').click(toggle_mode)
 $('#lang-button').click(toggle_language)
-
 $('#result-share-button').click(copy_results)
