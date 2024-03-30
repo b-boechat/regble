@@ -30,6 +30,9 @@ function update_end_game_modal(result, guesses, show) {
     switch (result) {
         case "victory":
             $('.modal-num-attempts').text(guesses.length)
+            if (guesses.length === 1) {
+                $('.modal-attempts-plural').addClass('dont-display')
+            }
             $('#end-game-modal').removeClass('defeat-modal')
             $('#end-game-modal').addClass('victory-modal')
             break
