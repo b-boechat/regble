@@ -46,5 +46,6 @@ function initialize_game() {
 $(document).ready(function() {
     let seed = initialize_game()
     restore_preferences_from_cookies()
+    console.log("Before restoring state.")
     restore_game_state_from_cookie(seed)
 })
