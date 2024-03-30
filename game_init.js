@@ -30,7 +30,6 @@ function color_box(red, green, blue) {
 function update_modal_correct_colors(red, green, blue) {
     $('#correct-red-modal').text(red)
     $('#correct-green-modal').text(green)
-    console.log(blue)
     $('#correct-blue-modal').text(blue)
 }
 
