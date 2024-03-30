@@ -89,7 +89,7 @@ function update_guess_table(input_values, box_values, fade_in = true) {
 
     $('.dont-display-table').removeClass('dont-display-table')
 
-    if (no_more_guesses()) {
+    if (get_game_state().result !== 'ongoing') {
         return
     }
 
