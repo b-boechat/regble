@@ -15,13 +15,13 @@ function check_game_status(last_guess, box_values) {
     return "ongoing"
 }
 
-function process_end_game(result, guesses, box_values) {
-    show_end_game_modal(result, guesses, box_values)
+function process_end_game(result, guesses, show_modal) {
+    update_end_game_modal(result, guesses, show_modal)
     disable_guess_button()
 }
 
 
-function show_end_game_modal(result, guesses, box_values) {
+function update_end_game_modal(result, guesses, show) {
     switch (result) {
         case "victory":
             $('.modal-num-attempts').text(guesses.length)
@@ -35,6 +35,12 @@ function show_end_game_modal(result, guesses, box_values) {
         default:
             console.log("Invalid result.")
     }
+    if (show) {
+        show_end_game_modal()
+    }
+}
+
+function show_end_game_modal() {
     $('#end-game-modal').modal('show')
 }
 
@@ -51,12 +57,11 @@ function get_game_state() {
     return {result: result, guesses: guesses, box_values: box_values}
 }
 
-function update_game(state) {
-
+function update_game(state, show_modal = true) {
     switch (state.result) {
         case "victory":
         case "defeat":
-            process_end_game(state.result, state.guesses, state.box_values)
+            process_end_game(state.result, state.guesses, show_modal)
             break
         default:
             return
