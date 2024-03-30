@@ -38,6 +38,7 @@ function save_game_state_cookie(state) {
 function load_game_state_cookie() {
     let state_str = Cookies.get('state')
     if (typeof state_str === undefined) {
+        console.log("No previous state cookie.")
         return undefined
     }
     return JSON.parse(state_str)
@@ -60,9 +61,13 @@ function restore_game_state_from_cookie(current_seed) {
     }
 
     saved_state = load_game_state_cookie()
+
     if (typeof saved_state === undefined) {
+        console.log("No previous game state, returning.")
         return
     }
+
+    console.log(saved_state)
 
     force_game_state(saved_state)
 }
