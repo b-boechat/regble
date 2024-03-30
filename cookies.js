@@ -74,7 +74,7 @@ function force_game_state(state) {
         console.log(i)
         console.log(state.guesses)
         console.log(state.box_values)
-        update_guess_table(state.guesses, state.box_values, false)
+        update_guess_table(state.guesses[i], state.box_values, false)
     }
     update_game(state, false)
 }
