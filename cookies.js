@@ -17,3 +17,7 @@ function delete_cookie(key) {
 function load_language_cookie() {
     return load_persistent_cookie('lang', 'en')
 }
+
+function load_mode_cookie() {
+    return load_persistent_cookie('mode', 'dark')
+}

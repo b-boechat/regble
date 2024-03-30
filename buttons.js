@@ -1,19 +1,9 @@
-function is_dark_mode() {
-    theme = $('html').attr('data-bs-theme')
-    return theme === 'dark'
-}
-
-function toggle_dark_mode() {
-    if (is_dark_mode()) {
-        set_light_mode()
-    }
-    else {
-        set_dark_mode()
-    }
-}
-
 function get_current_language() {
     return $('html').attr('lang')
+}
+
+function get_current_mode() {
+    return $('html').attr('data-bs-theme')
 } 
 
 function set_language(lang, add_fade_in = false) {
@@ -23,36 +13,70 @@ function set_language(lang, add_fade_in = false) {
     if (add_fade_in) {
         $('html [lang="pt"], html [lang="en"]').addClass('fade-in')
     }
-    switch(lang) {
+    switch (lang) {
         case 'pt':
             $('html').attr('lang', 'pt')
-            break;
+            break
         case 'en':
             $('html').attr('lang', 'en')
-            break;
+            break
         default:
             console.log('Invalid language.')
     }
 }
 
-function toggle_language() {
-    const current_lang = get_current_language()
-    switch (current_lang) {
-        case 'pt':
-            set_language('en', true)
-            save_persistent_cookie('lang', 'en')
+function set_mode(mode, add_transition = false) {
+    if (mode === get_current_mode()) {
+        return
+    }
+    if (add_transition) {
+        $('body').addClass('mode-updated')
+    }
+    switch (mode) {
+        case 'light':
+            set_light_mode()
             break;
-        case 'en':
-            set_language('pt', true)
-            save_persistent_cookie('lang', 'pt')
+        case 'dark':
+            set_dark_mode()
             break;
-        default:
-            console.log("Invalid language.")
     }
 }
 
+function toggle_mode() {
+    const current_mode = get_current_mode()
+    let new_mode
+    switch (current_mode) {
+        case 'light':
+            new_mode = 'dark'
+            break
+        case 'dark':
+            new_mode = 'light'
+            break
+        default:
+            console.log("Invalid mode.")
+    }
+    set_mode(new_mode, true)
+    save_persistent_cookie('mode', new_mode)
+}
+
+function toggle_language() {
+    const current_lang = get_current_language()
+    let new_lang
+    switch (current_lang) {
+        case 'pt':
+            new_lang = 'en'
+            break
+        case 'en':
+            new_lang = 'pt'
+            break
+        default:
+            console.log("Invalid language.")
+    }
+    set_language(new_lang, true)
+    save_persistent_cookie('lang', new_lang)
+}
+
 function set_light_mode() {
-    console.log("Setting light mode.")
     $('html').attr('data-bs-theme', 'light')
     $('body').removeClass('dark-mode')
     $('body').addClass('light-mode')
@@ -61,7 +85,6 @@ function set_light_mode() {
 }
 
 function set_dark_mode() {
-    console.log("Setting dark mode.")
     $('html').attr('data-bs-theme', 'dark')
     $('body').removeClass('light-mode')
     $('body').addClass('dark-mode')
@@ -138,7 +161,7 @@ function copy_results() {
 
 
 
-$('#light-mode-toggler-button').click(toggle_dark_mode)
+$('#light-mode-toggler-button').click(toggle_mode)
 $('#lang-button').click(toggle_language)
 
 $('#result-share-button').click(copy_results)

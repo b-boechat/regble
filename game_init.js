@@ -46,4 +46,6 @@ $(document).ready(function() {
     initialize_game()
     lang = load_language_cookie()
     set_language(lang)
+    mode = load_mode_cookie()
+    set_mode(mode)
 })

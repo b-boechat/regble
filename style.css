@@ -62,7 +62,6 @@
     height: 80px;
     width: 80px;
     border: 1px solid white;
-    animation: fadeIn 1s;
 }
 
 .light-mode#colored-box{
