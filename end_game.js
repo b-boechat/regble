@@ -12,18 +12,16 @@ function check_game_status(last_guess, box_values) {
     if (no_more_guesses()) {
         return "defeat" 
     }
-    return undefined
+    return "ongoing"
 }
 
 function process_end_game(result, guesses, box_values) {
-
-    show_end_game_modal_OVERWITE(result, guesses, box_values)
+    show_end_game_modal(result, guesses, box_values)
     disable_guess_button()
-
 }
 
 
-function show_end_game_modal_OVERWITE(result, guesses, box_values) {
+function show_end_game_modal(result, guesses, box_values) {
     switch (result) {
         case "victory":
             $('.modal-num-attempts').text(guesses.length)
@@ -40,20 +38,27 @@ function show_end_game_modal_OVERWITE(result, guesses, box_values) {
     $('#end-game-modal').modal('show')
 }
 
-function update_game() {
+function get_game_state() {
     let guesses = get_past_guesses()
     let box_values = read_box_values()
-
+    let result
     if (guesses.length === 0) {
-        return
+        result = "ongoing"
     }
+    else {
+        result = check_game_status(guesses.slice(-1)[0], box_values)
+    }
+    return {result: result, guesses: guesses, box_values: box_values}
+}
 
-    result = check_game_status(guesses.slice(-1)[0], box_values)
+function update_game() {
 
-    switch (result) {
+    state = get_game_state()
+
+    switch (state.result) {
         case "victory":
         case "defeat":
-            process_end_game(result, guesses, box_values)
+            process_end_game(state.result, state.guesses, state.box_values)
             break
         default:
             return

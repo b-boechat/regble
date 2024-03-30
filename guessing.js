@@ -114,18 +114,7 @@ function update_guess_table(input_values, box_values) {
 function make_guess(input_values) {
     let box_values = read_box_values()
     update_guess_table(input_values, box_values)
-
     update_game()
-    /*
-    if (check_victory(input_values, box_values)) {
-        show_end_game_modal('victory')
-        disable_guess_button()
-    }
-    else if (no_more_guesses()) {
-        show_end_game_modal('defeat')
-        disable_guess_button()
-    }
-    */
 }
 
 

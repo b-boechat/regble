@@ -30,6 +30,7 @@ function color_box(red, green, blue) {
 function update_modal_correct_colors(red, green, blue) {
     $('#correct-red-modal').text(red)
     $('#correct-green-modal').text(green)
+    console.log(blue)
     $('#correct-blue-modal').text(blue)
 }
 
@@ -38,14 +39,14 @@ function initialize_game() {
     let rng = get_rng(seed)
     let {red, green, blue} = generate_rgb_values(rng)
     color_box(red, green, blue)
-    update_modal_correct_colors(red, green,)
+    update_modal_correct_colors(red, green, blue)
 }
 
 
 $(document).ready(function() {
+    initialize_game()
     lang = load_language_cookie()
     set_language(lang)
     mode = load_mode_cookie()
     set_mode(mode)
-    initialize_game()
 })
