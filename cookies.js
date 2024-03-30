@@ -37,10 +37,8 @@ function save_game_state_cookie(state) {
 
 function load_game_state_cookie() {
     let state_str = Cookies.get('state')
-    console.log(state_str)
     
-    if (typeof state_str === undefined) {
-        console.log("No previous state cookie.")
+    if (typeof state_str === 'undefined') {
         return undefined
     }
     return JSON.parse(state_str)
@@ -56,28 +54,17 @@ function restore_preferences_from_cookies() {
 function restore_game_state_from_cookie(current_seed) {
 
     saved_seed = load_seed_cookie()
-    console.log("Seeds")
-    console.log(current_seed, saved_seed)
 
     if (saved_seed !== current_seed) {
-        console.log("Removing cookie (if it exists).")
         remove_cookie('state')
         save_daily_cookie('seed', current_seed)
         return
     }
-
-    console.log("Before loading state.")
     saved_state = load_game_state_cookie()
 
-    console.log(saved_state)
-
-    if (typeof saved_state === undefined) {
-        console.log("No previous game state, returning.")
+    if (typeof saved_state === 'undefined') {
         return
     }
-
-    console.log("Got through!")
-    console.log(saved_state)
 
     force_game_state(saved_state)
 }
