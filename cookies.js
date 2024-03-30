@@ -37,6 +37,8 @@ function save_game_state_cookie(state) {
 
 function load_game_state_cookie() {
     let state_str = Cookies.get('state')
+    console.log(state_str)
+    
     if (typeof state_str === undefined) {
         console.log("No previous state cookie.")
         return undefined
