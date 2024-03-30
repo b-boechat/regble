@@ -51,11 +51,9 @@ function get_past_guesses() {
 function show_end_game_modal(type) {
     switch (type) {
         case 'victory':
-            console.log("Victory!")
             $('#victory-modal').modal('show')
             break;
         case 'defeat':
-            console.log("Defeat!")
             $('#defeat-modal').modal('show')
             break;
         default:
@@ -94,8 +92,6 @@ function update_guess_table(input_values, box_values, fade_in = true) {
     if (no_more_guesses()) {
         return
     }
-    
-    console.log($('.dont-display-row .red-guess .rgb-value').eq(0))
 
     $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
     $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)

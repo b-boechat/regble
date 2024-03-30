@@ -71,9 +71,6 @@ function restore_game_state_from_cookie(current_seed) {
 
 function force_game_state(state) {
     for (let i = 0; i < state.guesses.length; ++i) {
-        console.log(i)
-        console.log(state.guesses)
-        console.log(state.box_values)
         update_guess_table(state.guesses[i], state.box_values, false)
     }
     update_game(state, false)
