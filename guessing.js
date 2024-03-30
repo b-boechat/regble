@@ -48,11 +48,6 @@ function get_past_guesses() {
     return past_guesses
 }
 
-
-function disable_guess_button() {
-    $('#guess-button').prop('disabled', true)
-}
-
 function show_end_game_modal(type) {
     switch (type) {
         case 'victory':
@@ -92,40 +87,34 @@ function process_all_icons(input_values, box_values) {
     process_icon("blue", input_values.blue, box_values.blue)
 }
 
-function update_guess_table(input_values, box_values) {
+function update_guess_table(input_values, box_values, fade_in = true) {
 
     $('.dont-display-table').removeClass('dont-display-table')
 
     if (no_more_guesses()) {
-        console.log("Can't guess anymore.")
+        return
     }
-    else {
-        $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
-        $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
-        $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
+    
+    $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
+    $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
+    $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
 
-        process_all_icons(input_values, box_values)
+    process_all_icons(input_values, box_values)
 
+    if (fade_in) {
         $('.dont-display-row').eq(0).addClass('fade-in')
-        $('.dont-display-row').eq(0).removeClass('dont-display-row')
     }
+    
+    $('.dont-display-row').eq(0).removeClass('dont-display-row')
 }
 
 function make_guess(input_values) {
     let box_values = read_box_values()
     update_guess_table(input_values, box_values)
 
-    update_game()
-    /*
-    if (check_victory(input_values, box_values)) {
-        show_end_game_modal('victory')
-        disable_guess_button()
-    }
-    else if (no_more_guesses()) {
-        show_end_game_modal('defeat')
-        disable_guess_button()
-    }
-    */
+    let state = get_game_state()
+    update_game(state)
+    save_game_state_cookie(state)
 }
 
 

@@ -1,4 +1,4 @@
-.light-mode *, .dark-mode * {
+.mode-updated * {
     transition-property: color, background-color;
     transition-duration: .25s;
     transition-timing-function: linear;
