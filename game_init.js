@@ -44,4 +44,6 @@ function initialize_game() {
 
 $(document).ready(function() {
     initialize_game()
+    lang = load_language_cookie()
+    set_language(lang)
 })

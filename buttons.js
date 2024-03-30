@@ -12,18 +12,42 @@ function toggle_dark_mode() {
     }
 }
 
-function toggle_language() {
-    const lang = $('html').attr('lang')
-    $('html [lang="pt"], html [lang="en"]').addClass('fade-in')
-    switch (lang) {
-        case 'en':
+function get_current_language() {
+    return $('html').attr('lang')
+} 
+
+function set_language(lang, add_fade_in = false) {
+    if (lang === get_current_language()) {
+        return
+    }
+    if (add_fade_in) {
+        $('html [lang="pt"], html [lang="en"]').addClass('fade-in')
+    }
+    switch(lang) {
+        case 'pt':
             $('html').attr('lang', 'pt')
             break;
-        case 'pt':
+        case 'en':
             $('html').attr('lang', 'en')
             break;
         default:
             console.log('Invalid language.')
+    }
+}
+
+function toggle_language() {
+    const current_lang = get_current_language()
+    switch (current_lang) {
+        case 'pt':
+            set_language('en', true)
+            save_persistent_cookie('lang', 'en')
+            break;
+        case 'en':
+            set_language('pt', true)
+            save_persistent_cookie('lang', 'pt')
+            break;
+        default:
+            console.log("Invalid language.")
     }
 }
 
