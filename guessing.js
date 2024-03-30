@@ -95,6 +95,8 @@ function update_guess_table(input_values, box_values, fade_in = true) {
         return
     }
     
+    console.log($('.dont-display-row .red-guess .rgb-value').eq(0))
+
     $('.dont-display-row .red-guess .rgb-value').eq(0).text(input_values.red)
     $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
     $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)

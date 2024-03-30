@@ -105,9 +105,6 @@ function get_rgble_id() {
     
     let today_date_midnight = new Date(arrival_date_global)
     today_date_midnight.setHours(0, 0, 0, 0)
-
-    console.log(start_date_midnight)
-    console.log(today_date_midnight)
     id = days_difference(start_date_midnight, today_date_midnight) + 1
     return id
 }
