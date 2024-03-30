@@ -46,7 +46,7 @@ function sfc32(a, b, c, d) {
 
 
 function get_rng(seed) {
-    proc_seed = cyrb128(seed)
+    proc_seed = cyrb128(parseInt(seed))
     rng = sfc32(proc_seed[0], proc_seed[1], proc_seed[2], proc_seed[3])
     return rng
 }

@@ -51,9 +51,7 @@ function get_game_state() {
     return {result: result, guesses: guesses, box_values: box_values}
 }
 
-function update_game() {
-
-    state = get_game_state()
+function update_game(state) {
 
     switch (state.result) {
         case "victory":

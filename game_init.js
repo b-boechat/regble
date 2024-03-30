@@ -8,7 +8,7 @@ function get_daily_seed(date) {
     const year_str = number_to_fixed_len_str(date.getFullYear(), 4)
     const month_str = number_to_fixed_len_str(date.getMonth() + 1, 2)
     const day_str = number_to_fixed_len_str(date.getDate(), 2)
-    return parseInt(year_str + month_str + day_str)
+    return year_str + month_str + day_str
 }
 
 
@@ -39,13 +39,12 @@ function initialize_game() {
     let {red, green, blue} = generate_rgb_values(rng)
     color_box(red, green, blue)
     update_modal_correct_colors(red, green, blue)
+    return seed
 }
 
 
 $(document).ready(function() {
-    initialize_game()
-    lang = load_language_cookie()
-    set_language(lang)
-    mode = load_mode_cookie()
-    set_mode(mode)
+    let seed = initialize_game()
+    restore_preferences_from_cookies()
+    restore_game_state_from_cookie(seed)
 })

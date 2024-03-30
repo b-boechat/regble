@@ -92,7 +92,7 @@ function process_all_icons(input_values, box_values) {
     process_icon("blue", input_values.blue, box_values.blue)
 }
 
-function update_guess_table(input_values, box_values) {
+function update_guess_table(input_values, box_values, fade_in = true) {
 
     $('.dont-display-table').removeClass('dont-display-table')
 
@@ -106,7 +106,9 @@ function update_guess_table(input_values, box_values) {
 
         process_all_icons(input_values, box_values)
 
-        $('.dont-display-row').eq(0).addClass('fade-in')
+        if (fade_in) {
+            $('.dont-display-row').eq(0).addClass('fade-in')
+        }
         $('.dont-display-row').eq(0).removeClass('dont-display-row')
     }
 }
@@ -114,7 +116,10 @@ function update_guess_table(input_values, box_values) {
 function make_guess(input_values) {
     let box_values = read_box_values()
     update_guess_table(input_values, box_values)
-    update_game()
+
+    let state = get_game_state()
+    update_game(state)
+    save_game_state_cookie(state)
 }
 
 
