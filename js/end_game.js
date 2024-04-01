@@ -1,12 +1,12 @@
-function check_victory(input_values, box_values) {
-    return (input_values.red === box_values.red && 
-        input_values.green === box_values.green && 
-        input_values.blue === box_values.blue)
+function check_equality(first_values, second_values) {
+    return (first_values.red === second_values.red && 
+        first_values.green === second_values.green && 
+        first_values.blue === second_values.blue)
 }
 
 
-function check_game_status(last_guess, box_values) {
-    if (check_victory(last_guess, box_values)) {
+function check_game_status(last_guess, correct_values) {
+    if (check_equality(last_guess, correct_values)) {
         return "victory" 
     }
     if (no_more_guesses()) {
@@ -54,15 +54,15 @@ function show_end_game_modal() {
 
 function get_game_state() {
     let guesses = get_past_guesses()
-    let box_values = read_box_values()
+    let correct_values = read_correct_values()
     let result
     if (guesses.length === 0) {
         result = "ongoing"
     }
     else {
-        result = check_game_status(guesses.slice(-1)[0], box_values)
+        result = check_game_status(guesses.slice(-1)[0], correct_values)
     }
-    return {result: result, guesses: guesses, box_values: box_values}
+    return {result: result, guesses: guesses, correct_values: correct_values}
 }
 
 function update_game(state, show_modal = true) {

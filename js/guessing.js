@@ -16,6 +16,14 @@ function rgb_string_to_values(str){ /* https://stackoverflow.com/questions/34980
     } : {}
 }
 
+function read_correct_values() {
+    return {
+        red: parseInt($('#correct-red-modal').text()),
+        green: parseInt($('#correct-green-modal').text()),
+        blue: parseInt($('#correct-blue-modal').text())
+    }
+}
+
 function read_box_values() {
     let main_box = $('#main-box')
     color = rgb_string_to_values(main_box.css('background-color'))
@@ -61,17 +69,17 @@ function show_end_game_modal(type) {
     }
 }
 
-function process_icon(color_name, guessed_value, box_value) {
+function process_icon(color_name, guessed_value, correct_value) {
     let check_icon_query = '.dont-display-row .' + color_name + '-guess .bi-check-lg'
     let fire_icon_query = '.dont-display-row .' + color_name + '-guess .bi-fire'
 
-    if (guessed_value === box_value) {
+    if (guessed_value === correct_value) {
         return
     }
-    if (Math.abs(guessed_value - box_value) < 15){
+    if (Math.abs(guessed_value - correct_value) < 15){
         $(fire_icon_query).eq(0).removeClass('dont-display-icon')
     }
-    if (guessed_value > box_value) {
+    if (guessed_value > correct_value) {
         $(check_icon_query).eq(0).addClass('bi-arrow-down').removeClass('bi-check-lg')
     }
     else {
@@ -79,13 +87,13 @@ function process_icon(color_name, guessed_value, box_value) {
     }
 }
 
-function process_all_icons(input_values, box_values) {
-    process_icon("red", input_values.red, box_values.red)
-    process_icon("green", input_values.green, box_values.green)
-    process_icon("blue", input_values.blue, box_values.blue)
+function process_all_icons(input_values, correct_values) {
+    process_icon("red", input_values.red, correct_values.red)
+    process_icon("green", input_values.green, correct_values.green)
+    process_icon("blue", input_values.blue, correct_values.blue)
 }
 
-function update_guess_table(input_values, box_values, fade_in = true) {
+function update_guess_table(input_values, correct_values, fade_in = true) {
 
     $('.dont-display-table').removeClass('dont-display-table')
 
@@ -97,7 +105,7 @@ function update_guess_table(input_values, box_values, fade_in = true) {
     $('.dont-display-row .green-guess .rgb-value').eq(0).text(input_values.green)
     $('.dont-display-row .blue-guess .rgb-value').eq(0).text(input_values.blue)
 
-    process_all_icons(input_values, box_values)
+    process_all_icons(input_values, correct_values)
 
     if (fade_in) {
         $('.dont-display-row').eq(0).addClass('fade-in')
@@ -108,7 +116,14 @@ function update_guess_table(input_values, box_values, fade_in = true) {
 
 function make_guess(input_values) {
     let box_values = read_box_values()
-    update_guess_table(input_values, box_values)
+    let correct_values = read_correct_values()
+
+    if (!check_equality(correct_values, box_values)) {
+        $('#color-change-warning-modal').modal('show')
+        return
+    }
+
+    update_guess_table(input_values, correct_values)
 
     let state = get_game_state()
     update_game(state)
