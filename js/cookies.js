@@ -71,7 +71,12 @@ function restore_game_state_from_cookie(current_seed) {
 
 function force_game_state(state) {
     for (let i = 0; i < state.guesses.length; ++i) {
-        update_guess_table(state.guesses[i], state.box_values, false)
+        if (typeof state.correct_values !== undefined) {
+            update_guess_table(state.guesses[i], state.correct_values, false)
+        }
+        else { /* Shouldn't be needed starting from 2024/4/2. */
+            update_guess_table(state.guesses[i], state.box_values, false)
+        }
     }
     update_game(state, false)
 }
