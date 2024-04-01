@@ -124,19 +124,19 @@ function get_comparation_unicode(guess_value, box_value) {
     return "\u2B07" /* Down arrow */
 }
 
-function get_guess_share_text(guess, box_values) {
-    return get_comparation_unicode(guess.red, box_values.red) +
-        get_comparation_unicode(guess.green, box_values.green) +
-        get_comparation_unicode(guess.blue, box_values.blue)
+function get_guess_share_text(guess, correct_values) {
+    return get_comparation_unicode(guess.red, correct_values.red) +
+        get_comparation_unicode(guess.green, correct_values.green) +
+        get_comparation_unicode(guess.blue, correct_values.blue)
 }
 
 function get_result_text() {
     const guesses = get_past_guesses()
-    const box_values = read_box_values()
+    const correct_values = read_correct_values()
 
     let used_guesses
 
-    if (check_victory(guesses.slice(-1)[0], box_values)) {
+    if (check_equality(guesses.slice(-1)[0], correct_values)) {
         used_guesses = guesses.length
     }
     else {
@@ -145,7 +145,7 @@ function get_result_text() {
 
     let result_text = 'Regble #'+get_rgble_id()+' '+used_guesses+'/'+get_max_num_guesses() + '\n'
     for (let i = 0; i < guesses.length; ++i) {
-        result_text = result_text + '\n' + get_guess_share_text(guesses[i], box_values)
+        result_text = result_text + '\n' + get_guess_share_text(guesses[i], correct_values)
     }
     return result_text
 }
