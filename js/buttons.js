@@ -143,7 +143,7 @@ function get_result_text() {
         used_guesses = "X"
     }
 
-    let result_text = 'Regble #'+get_rgble_id()+' '+used_guesses+'/'+get_max_num_guesses() + '\n'
+    let result_text = 'bit.ly/regble #'+get_rgble_id()+' '+used_guesses+'/'+get_max_num_guesses() + '\n'
     for (let i = 0; i < guesses.length; ++i) {
         result_text = result_text + '\n' + get_guess_share_text(guesses[i], correct_values)
     }
